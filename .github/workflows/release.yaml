@@ -28,7 +28,7 @@ jobs:
         run: pip install -e .[dev]
 
       - name: Build dist
-        run: python setup.py sdist bdist_wheel
+        run: python -m build
 
       - name: Publish release to test PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
@@ -51,7 +51,7 @@ jobs:
         run: pip install -e .[dev]
 
       - name: Build dist
-        run: python setup.py sdist bdist_wheel
+        run: python -m build
 
       - name: Publish release to test PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
