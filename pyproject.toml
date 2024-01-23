@@ -37,6 +37,7 @@ dev = [
     "pytest~=7.4.4",
     "requests~=2.31.0",
     "setuptools-scm~=8.0.4",
+    "types-requests>=2.31.0.20240106",
 ]
 
 [tool.mypy]
