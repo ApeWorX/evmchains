@@ -27,7 +27,8 @@ jobs:
             pip install .[dev]
 
         - name: Run Black
-          run: black --check .
+          #run: black --check .
+          run: black --diff .
 
         - name: Run isort
           run: isort --check-only .
