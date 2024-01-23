@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "setuptools_scm[toml]>=5.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evmchains"
+description = "Packaged metadata on Ethereum Virtual Machine (EVM) chains"
+urls = {source = "https://github.com/ApeWorx/evmchains"}
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["ethereum", "evm", "blockchain"]
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "pydantic~=2.5.3",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "black~=23.12.1",
+    "isort~=5.13.2",
+    "mypy~=1.8.0",
+    "pytest~=7.4.4",
+    "requests-2.31.0",
+    "setuptools-scm-8.0.4",
+]
+
+[tool.mypy]
+exclude = "build/"
+
+[tool.setuptools_scm]
+write_to = "evmchains/_meta.py"
+
+# NOTE: you have to use single-quoted strings in TOML for regular expressions.
+# It's the equivalent of r-strings in Python.  Multiline strings are treated as
+# verbose regular expressions by Black.  Use [ ] to denote a significant space
+# character.
+
+[tool.black]
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+
+[tool.pytest.ini_options]
+python_files = "test_*.py"
+testpaths = "tests"
+
+[tool.isort]
+force_grid_wrap = 0
+include_trailing_comma = true
+multi_line_output = 3
+use_parentheses = true
