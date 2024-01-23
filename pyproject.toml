@@ -35,8 +35,8 @@ dev = [
     "isort~=5.13.2",
     "mypy~=1.8.0",
     "pytest~=7.4.4",
-    "requests-2.31.0",
-    "setuptools-scm-8.0.4",
+    "requests~=2.31.0",
+    "setuptools-scm~=8.0.4",
 ]
 
 [tool.mypy]
