@@ -1,11 +1,11 @@
-from evmchains import PUBLIC_CHAIN_RPCS, Chain, get_chain_meta
+from evmchains import PUBLIC_CHAIN_META, Chain, get_chain_meta
 
 
 def test_chain_structure():
-    assert "ethereum" in PUBLIC_CHAIN_RPCS
-    assert "mainnet" in PUBLIC_CHAIN_RPCS["ethereum"]
+    assert "ethereum" in PUBLIC_CHAIN_META
+    assert "mainnet" in PUBLIC_CHAIN_META["ethereum"]
 
-    chain = PUBLIC_CHAIN_RPCS["ethereum"]["mainnet"]
+    chain = PUBLIC_CHAIN_META["ethereum"]["mainnet"]
     assert isinstance(chain, dict)
     assert len(chain["rpc"]) > 0
     assert chain["chainId"] == 1
