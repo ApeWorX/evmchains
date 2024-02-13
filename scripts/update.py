@@ -56,6 +56,10 @@ CHAIN_IDS = {
         "goerli": 420,
         "sepolia": 11155420,
     },
+    "oort": {
+        "mainnet": 970,
+        "dev": 9700,
+    },
     "polygon": {
         "mainnet": 137,
         "mumbai": 80001,
