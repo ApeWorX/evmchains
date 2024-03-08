@@ -35,6 +35,10 @@ CHAIN_IDS = {
         "mainnet": 8453,
         "sepolia": 84532,
     },
+    "blast": {
+        "mainnet": 81457,
+        "sepolia": 168587773,
+    },
     "bsc": {
         "mainnet": 56,
         "testnet": 97,
