@@ -42,3 +42,13 @@ assert chain.chainId == 1
 
 Please see the [contributing guide](CONTRIBUTING.md) to learn more how to contribute to this project.
 Comments, questions, criticisms and pull requests are welcomed.
+
+### Adding Chains
+
+To add a chain to the metadata, please open a pull request with the following changes:
+
+- Update `CHAIN_IDS` in `scripts/update.py` with the chain IDs you want to add
+- Run `python scripts/update.py`
+- Submit a PR with the updated script and updated `evmchain/chains.py` metdata file
+
+**Do not edit `evmchain/chains.py` manually.** Any manual changes are likely to be overwritten later.
