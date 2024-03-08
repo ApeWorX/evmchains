@@ -224,8 +224,16 @@ PUBLIC_CHAIN_META: Dict[str, Dict[str, Dict[str, Any]]] = {
             "chainId": 81457,
             "ens": None,
             "explorers": [
-                {"name": "blastscan", "standard": "none", "url": "https://blastscan.io"},
-                {"name": "blastexplorer", "standard": "none", "url": "https://blastexplorer.io"},
+                {
+                    "name": "blastscan",
+                    "standard": "none",
+                    "url": "https://blastscan.io",
+                },
+                {
+                    "name": "blastexplorer",
+                    "standard": "none",
+                    "url": "https://blastexplorer.io",
+                },
             ],
             "faucets": [],
             "features": None,
@@ -250,7 +258,11 @@ PUBLIC_CHAIN_META: Dict[str, Dict[str, Dict[str, Any]]] = {
             "chainId": 168587773,
             "ens": None,
             "explorers": [
-                {"name": "blastscan", "standard": "none", "url": "https://sepolia.blastscan.io/"},
+                {
+                    "name": "blastscan",
+                    "standard": "none",
+                    "url": "https://sepolia.blastscan.io/",
+                },
             ],
             "faucets": [],
             "features": None,
