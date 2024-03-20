@@ -601,6 +601,80 @@ PUBLIC_CHAIN_META: Dict[str, Dict[str, Dict[str, Any]]] = {
             "slip44": 700,
         },
     },
+    "linea": {
+        "mainnet": {
+            "chain": "ETH",
+            "chainId": 59144,
+            "ens": None,
+            "explorers": [
+                {
+                    "name": "lineascan",
+                    "standard": "EIP3091",
+                    "url": "https://lineascan.build",
+                },
+            ],
+            "faucets": [],
+            "features": None,
+            "icon": "linea",
+            "infoURL": "https://docs.linea.build",
+            "name": "Linea",
+            "nativeCurrency": {"decimals": 18, "name": "ETH", "symbol": "ETH"},
+            "networkId": 59144,
+            "rpc": [
+                "https://rpc.linea.build",
+            ],
+            "shortName": "linea",
+            "slip44": None,
+        },
+        "goerli": {
+            "chain": "ETH",
+            "chainId": 59140,
+            "ens": None,
+            "explorers": [
+                {
+                    "name": "lineascan",
+                    "standard": "EIP3091",
+                    "url": "https://goerli.lineascan.build",
+                },
+            ],
+            "faucets": [],
+            "features": None,
+            "icon": "linea",
+            "infoURL": "https://docs.linea.build",
+            "name": "Linea",
+            "nativeCurrency": {"decimals": 18, "name": "ETH", "symbol": "ETH"},
+            "networkId": 59140,
+            "rpc": [
+                "https://rpc.goerli.linea.build",
+            ],
+            "shortName": "linea",
+            "slip44": None,
+        },
+        "sepolia": {
+            "chain": "ETH",
+            "chainId": 59141,
+            "ens": None,
+            "explorers": [
+                {
+                    "name": "lineascan",
+                    "standard": "EIP3091",
+                    "url": "https://sepolia.lineascan.build",
+                },
+            ],
+            "faucets": [],
+            "features": None,
+            "icon": "linea",
+            "infoURL": "https://docs.linea.build",
+            "name": "Linea",
+            "nativeCurrency": {"decimals": 18, "name": "ETH", "symbol": "ETH"},
+            "networkId": 59141,
+            "rpc": [
+                "https://rpc.sepolia.linea.build",
+            ],
+            "shortName": "linea",
+            "slip44": None,
+        },        
+    }, 
     "optimism": {
         "mainnet": {
             "chain": "ETH",
