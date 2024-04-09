@@ -72,6 +72,10 @@ CHAIN_IDS = {
         "mainnet": 1101,
         "testnet": 1442,
     },
+    "linea": {
+        "mainnet": 59144,
+        "sepolia": 59141,
+    },
 }
 
 pp = PrettyPrinter(indent=4)
