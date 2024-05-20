@@ -78,7 +78,7 @@ CHAIN_IDS = {
     },
     "rootstock": {
         "mainnet": 30,
-        "tesnet": 31,
+        "testnet": 31,
     },
 }
 
