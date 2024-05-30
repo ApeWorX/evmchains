@@ -46,6 +46,7 @@ CHAIN_IDS = {
     "ethereum": {
         "mainnet": 1,
         "goerli": 5,
+        "holesky": 17000,
         "sepolia": 11155111,
     },
     "fantom": {
