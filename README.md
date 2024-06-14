@@ -2,13 +2,13 @@
 
 Provides general metadata on EVM-compatible chains organized by Ape-style ecosystem and network.
 
-Original soure data: https://github.com/ethereum-lists/chains
+Original source data: https://github.com/ethereum-lists/chains
 
 ## Quick Start
 
 ## Dependencies
 
-- [python3](https://www.python.org/downloads) version 3.8 up to 3.11.
+- [python3](https://www.python.org/downloads) version 3.8 up to 3.12.
 
 ## Installation
 

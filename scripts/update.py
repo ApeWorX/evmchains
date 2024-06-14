@@ -56,6 +56,10 @@ CHAIN_IDS = {
     "gnosis": {
         "mainnet": 100,
     },
+    "linea": {
+        "mainnet": 59144,
+        "sepolia": 59141,
+    },
     "optimism": {
         "mainnet": 10,
         "goerli": 420,
@@ -73,14 +77,14 @@ CHAIN_IDS = {
         "mainnet": 1101,
         "testnet": 1442,
     },
-    "linea": {
-        "mainnet": 59144,
-        "sepolia": 59141,
-    },
     "rootstock": {
         "mainnet": 30,
         "testnet": 31,
     },
+    "shibarium": {
+        "mainnet": 109,
+        "puppynet": 157,
+    }
 }
 
 pp = PrettyPrinter(indent=4)
