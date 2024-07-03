@@ -72,10 +72,12 @@ CHAIN_IDS = {
     "polygon": {
         "mainnet": 137,
         "mumbai": 80001,
+        "amoy": 80002,
     },
     "polygon-zkevm": {
         "mainnet": 1101,
         "testnet": 1442,
+        "cardona": 2442,
     },
     "rootstock": {
         "mainnet": 30,
