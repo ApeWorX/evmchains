@@ -17,7 +17,9 @@ SOURCE_URL = (
 CHAIN_CONST_FILE = Path(__file__).parent.parent / "evmchains" / "chains.py"
 BLACKLIST_STRINGS = [
     # 2024-01-19: Node appears to be broken.  Returning errors on simple requests.
-    "rpc.blocknative.com"
+    "rpc.blocknative.com",
+    # 2024-09-05: Node returning 504s for days.
+    "rpc-sepolia.rockx.com",
 ]
 
 # Mapping of Ape ecosystem:network to chain IDs. These are the chains that we will be fetching.
