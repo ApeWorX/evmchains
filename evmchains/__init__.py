@@ -1,3 +1,9 @@
+"""EVM-compatible chains metadata.
+
+Chain data is organized by Ape-style ecosystem and network and provided by the
+below utility functions.
+"""
+
 import os
 import random
 import re
@@ -10,7 +16,7 @@ ENV_VAR_REGEX = re.compile(r"\$\{([A-Za-z0-9_]+)\}")
 
 
 def get_chain_meta(ecosystem: str, network: str) -> Chain:
-    """Return a Chain instance with metadata for an EVM chain"""
+    """Return a Chain instance with metadata for an EVM chain."""
     if (
         ecosystem not in PUBLIC_CHAIN_META
         or network not in PUBLIC_CHAIN_META[ecosystem]
@@ -21,7 +27,7 @@ def get_chain_meta(ecosystem: str, network: str) -> Chain:
 
 
 def get_rpcs(ecosystem: str, network: str) -> List[str]:
-    """Get a list of valid RPC endpoints for an ecosystem:network pair"""
+    """Get a list of valid RPC endpoints for an ecosystem:network pair."""
     rpcs = []
 
     chain = get_chain_meta(ecosystem, network)
@@ -42,7 +48,7 @@ def get_rpcs(ecosystem: str, network: str) -> List[str]:
 
 
 def get_random_rpc(ecosystem: str, network: str) -> str:
-    """Return a random RPC endpoint for an ecosystem:network pair"""
+    """Return a random RPC endpoint for an ecosystem:network pair."""
     rpcs = get_rpcs(ecosystem, network)
     return random.choice(rpcs)
 
