@@ -537,6 +537,32 @@ PUBLIC_CHAIN_META: Dict[str, Dict[str, Dict[str, Any]]] = {
             "shortName": "sep",
             "slip44": 1,
         },
+        "ronin": {
+            "chain": "ETH",
+            "chainId": 2020,
+            "ens": None,
+            "explorers": [
+            ],
+            "faucets": [
+            ],
+            "features": None,
+            "icon": None,
+            "infoURL": "",
+            "name": "",
+            "nativeCurrency": {
+                "decimals": 18,
+                "name": "",
+                "symbol": "RON",
+            },
+            "networkId": 2020,
+            "rpc": [
+                "https://api.roninchain.com/rpc",
+                "https://ronin.lgns.net/rpc",
+                "https://ronin.lgns.net/rpc",
+            ],
+            "shortName": "ron",
+            "slip44": 1,
+        },
     },
     "fantom": {
         "mainnet": {
