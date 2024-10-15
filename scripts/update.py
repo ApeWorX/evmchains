@@ -51,6 +51,7 @@ CHAIN_IDS = {
     "bsc": {
         "mainnet": 56,
         "testnet": 97,
+        "opBNB": 204,
     },
     "ethereum": {
         "mainnet": 1,
