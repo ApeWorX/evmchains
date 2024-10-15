@@ -35,6 +35,7 @@ CHAIN_IDS = {
         "mainnet": 42161,
         "goerli": 421613,
         "sepolia": 421614,
+        "nova": 42170,
     },
     "avalanche": {
         "mainnet": 43114,
@@ -47,10 +48,21 @@ CHAIN_IDS = {
     "blast": {
         "mainnet": 81457,
         "sepolia": 168587773,
+        "testnet": 23888,
     },
     "bsc": {
         "mainnet": 56,
         "testnet": 97,
+        "opBNB": 204,
+        "opBNB-testnet": 5611,
+    },
+    "bttc": {
+        "mainnet": 199,
+        "donau": 1028,
+    },
+    "celo": {
+        "mainnet": 42220,
+        "alfajores": 44787,
     },
     "ethereum": {
         "mainnet": 1,
@@ -62,12 +74,26 @@ CHAIN_IDS = {
         "mainnet": 250,
         "testnet": 4002,
     },
+    "frax": {
+        "mainnet": 252,
+        "testnet": 2522,
+    },
     "gnosis": {
         "mainnet": 100,
+    },
+    "kroma": {
+        "mainnet": 255,
+        "testnet": 2358,
     },
     "linea": {
         "mainnet": 59144,
         "sepolia": 59141,
+        "testnet": 59140,
+    },
+    "moonbeam": {
+        "mainnet": 1284,
+        "moonbase": 1287,
+        "moonriver": 1285,
     },
     "optimism": {
         "mainnet": 10,
@@ -95,6 +121,17 @@ CHAIN_IDS = {
     "shibarium": {
         "mainnet": 109,
         "puppynet": 157,
+    },
+    "scroll": {
+        "mainnet": 534352,
+        "testnet": 534351,
+    },
+    "unichain": {
+        "testnet": 1301,
+    },
+    "wemix": {
+        "mainnet": 1111,
+        "testnet": 1112,
     },
 }
 
