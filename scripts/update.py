@@ -53,8 +53,8 @@ CHAIN_IDS = {
     "bsc": {
         "mainnet": 56,
         "testnet": 97,
-        "opBNB": 204,
-        "opBNB-testnet": 5611,
+        "opbnb": 204,
+        "opbnb-testnet": 5611,
     },
     "bttc": {
         "mainnet": 199,
