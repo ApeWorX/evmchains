@@ -76,19 +76,18 @@ CHAIN_IDS = {
     },
     "frax": {
         "mainnet": 252,
-        "testnet": 2522,
+        "holesky": 2522,
     },
     "gnosis": {
         "mainnet": 100,
     },
     "kroma": {
         "mainnet": 255,
-        "testnet": 2358,
+        "sepolia": 2358,
     },
     "linea": {
         "mainnet": 59144,
         "sepolia": 59141,
-        "testnet": 59140,
     },
     "moonbeam": {
         "mainnet": 1284,
@@ -124,10 +123,10 @@ CHAIN_IDS = {
     },
     "scroll": {
         "mainnet": 534352,
-        "testnet": 534351,
+        "sepolia": 534351,
     },
     "unichain": {
-        "testnet": 1301,
+        "sepolia": 1301,
     },
     "wemix": {
         "mainnet": 1111,
