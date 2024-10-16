@@ -74,7 +74,7 @@ CHAIN_IDS = {
         "mainnet": 250,
         "testnet": 4002,
     },
-    "frax": {
+    "fraxtal": {
         "mainnet": 252,
         "holesky": 2522,
     },
