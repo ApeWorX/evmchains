@@ -64,6 +64,14 @@ CHAIN_IDS = {
         "mainnet": 42220,
         "alfajores": 44787,
     },
+    "cronos": {
+        "mainnet": 25,
+        "testnet": 338,
+    },
+    "cronos-zkevm": {
+        "mainnet": 388,
+        "testnet": 282,
+    },
     "ethereum": {
         "mainnet": 1,
         "goerli": 5,
@@ -88,6 +96,11 @@ CHAIN_IDS = {
     "linea": {
         "mainnet": 59144,
         "sepolia": 59141,
+    },
+    "mantle": {
+        "mainnet": 5000,
+        "testnet": 5001,
+        "sepolia": 5003,
     },
     "moonbeam": {
         "mainnet": 1284,
@@ -125,6 +138,10 @@ CHAIN_IDS = {
         "mainnet": 534352,
         "sepolia": 534351,
     },
+    "taiko": {
+        "mainnet": 167000,
+        "hekla": 167009,
+    },
     "unichain": {
         "sepolia": 1301,
     },
@@ -132,6 +149,14 @@ CHAIN_IDS = {
         "mainnet": 1111,
         "testnet": 1112,
     },
+    "xai": {
+        "mainnet": 660279,
+        "sepolia": 37714555429,
+    },
+    "zksync": {
+        "mainnet": 324,
+        "sepolia": 300,
+    }
 }
 
 pp = PrettyPrinter(indent=4)
