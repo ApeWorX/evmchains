@@ -156,7 +156,7 @@ CHAIN_IDS = {
     "zksync": {
         "mainnet": 324,
         "sepolia": 300,
-    }
+    },
 }
 
 pp = PrettyPrinter(indent=4)
