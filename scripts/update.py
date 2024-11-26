@@ -103,6 +103,10 @@ CHAIN_IDS = {
         "mainnet": 970,
         "dev": 9700,
     },
+    "palm": {
+        "mainnet": 11297108109,
+        "testnet": 11297108099,
+    },
     "polygon": {
         "mainnet": 137,
         "mumbai": 80001,
