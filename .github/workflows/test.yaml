@@ -26,15 +26,11 @@ jobs:
             python -m pip install --upgrade pip
             pip install .[dev]
 
-        - name: Run Black
-          #run: black --check .
-          run: black --diff .
+        - name: Run linter
+          run: ruff check
 
-        - name: Run isort
-          run: isort --check-only .
-
-        - name: Run flake8
-          run: flake8 .
+        - name: Run format check
+          run: ruff format --check --diff
 
     type-check:
         runs-on: ubuntu-latest

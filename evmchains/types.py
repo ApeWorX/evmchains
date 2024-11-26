@@ -1,9 +1,14 @@
+"""Types used in the evmchains package."""
+
+# ruff: noqa: N815
 from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel
 
 
 class Chain(BaseModel):
+    """Chain object format for chain data from ethereum-lists/chains."""
+
     chainId: int
     networkId: int
     name: str
