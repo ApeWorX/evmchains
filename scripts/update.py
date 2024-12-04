@@ -167,6 +167,10 @@ CHAIN_IDS = {
         "testnet": 1442,
         "cardona": 2442,
     },
+    "polynomial": {
+        "mainnet": 8008,
+        "sepolia": 80008,
+    },
     "rootstock": {
         "mainnet": 30,
         "testnet": 31,
@@ -197,6 +201,10 @@ CHAIN_IDS = {
         "mainnet": 1111,
         "testnet": 1112,
     },
+    "world-chain": {
+        "mainnet": 480,
+        "sepolia": 4801,
+    },
     "xai": {
         "mainnet": 660279,
         "sepolia": 37714555429,
@@ -215,7 +223,7 @@ CHAIN_IDS = {
     },
     "zora": {
         "mainnet": 7777777,
-        "testnet": 999999999,
+        "sepolia": 999999999,
     },
 }
 
