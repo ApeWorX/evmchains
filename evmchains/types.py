@@ -23,5 +23,3 @@ class Chain(BaseModel):
     features: Optional[List[Dict[str, str]]] = None
     slip44: Optional[int] = None
     ens: Optional[Dict[str, str]] = None
-
-
