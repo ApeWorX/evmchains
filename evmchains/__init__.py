@@ -7,16 +7,19 @@ below utility functions.
 import os
 import random
 import re
-from typing import List
+from typing import TYPE_CHECKING, List
 
-from evmchains.chains import PUBLIC_CHAIN_META
-from evmchains.types import Chain
+if TYPE_CHECKING:
+    from evmchains.types import Chain
 
 ENV_VAR_REGEX = re.compile(r"\$\{([A-Za-z0-9_]+)\}")
 
 
-def get_chain_meta(ecosystem: str, network: str) -> Chain:
+def get_chain_meta(ecosystem: str, network: str) -> "Chain":
     """Return a Chain instance with metadata for an EVM chain."""
+    from evmchains.chains import PUBLIC_CHAIN_META
+    from evmchains.types import Chain
+
     if (
         ecosystem not in PUBLIC_CHAIN_META
         or network not in PUBLIC_CHAIN_META[ecosystem]
@@ -51,6 +54,21 @@ def get_random_rpc(ecosystem: str, network: str) -> str:
     """Return a random RPC endpoint for an ecosystem:network pair."""
     rpcs = get_rpcs(ecosystem, network)
     return random.choice(rpcs)
+
+
+def __getattr__(name: str):
+    if name == "PUBLIC_CHAIN_META":
+        from evmchains.chains import PUBLIC_CHAIN_META
+
+        return PUBLIC_CHAIN_META
+
+    elif name == "Chain":
+        from evmchains.types import Chain
+
+        return Chain
+
+    else:
+        raise AttributeError(name)
 
 
 __all__ = ["PUBLIC_CHAIN_META", "Chain", "get_chain_meta", "get_random_rpc", "get_rpcs"]
