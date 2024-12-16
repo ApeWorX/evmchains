@@ -7,17 +7,19 @@ below utility functions.
 import os
 import random
 import re
-from typing import List
+from typing import TYPE_CHECKING, List
 
-from evmchains.types import Chain
+if TYPE_CHECKING:
+    from evmchains.types import Chain
 
 ENV_VAR_REGEX = re.compile(r"\$\{([A-Za-z0-9_]+)\}")
 
 
-def get_chain_meta(ecosystem: str, network: str) -> Chain:
+def get_chain_meta(ecosystem: str, network: str) -> "Chain":
     """Return a Chain instance with metadata for an EVM chain."""
     from evmchains.chains import PUBLIC_CHAIN_META
-    
+    from evmchains.types import Chain
+
     if (
         ecosystem not in PUBLIC_CHAIN_META
         or network not in PUBLIC_CHAIN_META[ecosystem]
