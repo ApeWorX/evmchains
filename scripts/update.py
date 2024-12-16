@@ -31,11 +31,22 @@ BLACKLIST_STRINGS = [
 # Mapping of Ape ecosystem:network to chain IDs. These are the chains that we will be
 # fetching.
 CHAIN_IDS = {
+    "abstract": {
+        "mainnet": 2741,
+        "testnet": 11124,
+    },
+    "apechain": {
+        "mainnet": 33139,
+        "curtis": 33111,
+    },
     "arbitrum": {
         "mainnet": 42161,
         "goerli": 421613,
         "sepolia": 421614,
         "nova": 42170,
+    },
+    "astar": {
+        "mainnet": 592,
     },
     "avalanche": {
         "mainnet": 43114,
@@ -44,6 +55,9 @@ CHAIN_IDS = {
     "base": {
         "mainnet": 8453,
         "sepolia": 84532,
+    },
+    "berachain": {
+        "bartio": 80084,
     },
     "blast": {
         "mainnet": 81457,
@@ -72,6 +86,10 @@ CHAIN_IDS = {
         "mainnet": 388,
         "testnet": 282,
     },
+    "crossfi": {
+        "mainnet": 4158,
+        "testnet": 4157,
+    },
     "ethereum": {
         "mainnet": 1,
         "goerli": 5,
@@ -82,25 +100,44 @@ CHAIN_IDS = {
         "mainnet": 250,
         "testnet": 4002,
     },
+    "flow-evm": {
+        "mainnet": 747,
+        "testnet": 545,
+    },
     "fraxtal": {
         "mainnet": 252,
         "holesky": 2522,
     },
+    "geist": {
+        "mainnet": 63157,
+        "polter": 631571,
+    },
     "gnosis": {
+        "chiado": 10200,
         "mainnet": 100,
     },
     "kroma": {
         "mainnet": 255,
         "sepolia": 2358,
     },
+    "lens": {
+        "sepolia": 37111,
+    },
     "linea": {
         "mainnet": 59144,
         "sepolia": 59141,
+    },
+    "lumia": {
+        "prism": 994873017,
+        "testnet": 1952959480,
     },
     "mantle": {
         "mainnet": 5000,
         "testnet": 5001,
         "sepolia": 5003,
+    },
+    "metis": {
+        "mainnet": 1088,
     },
     "moonbeam": {
         "mainnet": 1284,
@@ -130,6 +167,10 @@ CHAIN_IDS = {
         "testnet": 1442,
         "cardona": 2442,
     },
+    "polynomial": {
+        "mainnet": 8008,
+        "sepolia": 80008,
+    },
     "rootstock": {
         "mainnet": 30,
         "testnet": 31,
@@ -142,6 +183,13 @@ CHAIN_IDS = {
         "mainnet": 534352,
         "sepolia": 534351,
     },
+    "shape": {
+        "mainnet": 360,
+        "sepolia": 11011,
+    },
+    "soneium": {
+        "minato": 1946,
+    },
     "taiko": {
         "mainnet": 167000,
         "hekla": 167009,
@@ -153,13 +201,29 @@ CHAIN_IDS = {
         "mainnet": 1111,
         "testnet": 1112,
     },
+    "world-chain": {
+        "mainnet": 480,
+        "sepolia": 4801,
+    },
     "xai": {
         "mainnet": 660279,
         "sepolia": 37714555429,
     },
+    "xmtp": {
+        "mainnet": 24132016,
+        "sepolia": 241320161,
+    },
+    "zetachain": {
+        "mainnet": 7000,
+        "testnet": 7001,
+    },
     "zksync": {
         "mainnet": 324,
         "sepolia": 300,
+    },
+    "zora": {
+        "mainnet": 7777777,
+        "sepolia": 999999999,
     },
 }
 
@@ -193,12 +257,12 @@ def fetch_chain(chain_id: int) -> Chain:
     url = urljoin(SOURCE_URL, f"eip155-{chain_id}.json")
 
     logger.info(f"GET {url}")
-    r = requests.get(url)
-    r.raise_for_status()
+    response = requests.get(url)
+    response.raise_for_status()
 
-    chain = Chain.model_validate_json(r.text)
+    chain = Chain.model_validate_json(response.text)
 
-    # Filter out blacklised URIs
+    # Filter out blacklisted URIs
     chain.rpc = list(filter(lambda rpc: not is_uri_blacklisted(rpc), chain.rpc))
 
     # Filter out unwanted protocols (e.g. websocket)

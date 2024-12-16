@@ -18,7 +18,7 @@ class Chain(BaseModel):
     rpc: List[str]
     faucets: List[str]
     nativeCurrency: Dict[str, Any]
-    explorers: List[Dict[str, str]]
+    explorers: List[Dict[str, str]] = []
     icon: Optional[str] = None
     features: Optional[List[Dict[str, str]]] = None
     slip44: Optional[int] = None

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel", "setuptools_scm[toml]>=5.0"]
+requires = ["setuptools>=70.2.0", "wheel", "setuptools_scm[toml]>=5.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -25,6 +25,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
     "pydantic>=2.5.3,<3",
