@@ -171,6 +171,10 @@ CHAIN_IDS = {
         "mainnet": 8008,
         "sepolia": 80008,
     },
+    "ronin": {
+        "mainnet": 2020,
+        "testnet": 2021,
+    },
     "rootstock": {
         "mainnet": 30,
         "testnet": 31,
