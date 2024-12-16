@@ -56,4 +56,19 @@ def get_random_rpc(ecosystem: str, network: str) -> str:
     return random.choice(rpcs)
 
 
+def __getattr__(name: str):
+    if name == "PUBLIC_CHAIN_META":
+        from evmchains.chains import PUBLIC_CHAIN_META
+
+        return PUBLIC_CHAIN_META
+
+    elif name == "Chain":
+        from evmchains.types import Chain
+
+        return Chain
+
+    else:
+        raise AttributeError(name)
+
+
 __all__ = ["PUBLIC_CHAIN_META", "Chain", "get_chain_meta", "get_random_rpc", "get_rpcs"]
