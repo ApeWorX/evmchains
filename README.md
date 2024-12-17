@@ -49,6 +49,6 @@ To add a chain to the metadata, please open a pull request with the following ch
 
 - Update `CHAIN_IDS` in `scripts/update.py` with the chain IDs you want to add
 - Run `python scripts/update.py`
-- Submit a PR with the updated script and updated `evmchain/chains.py` metdata file
+- Submit a PR with the updated script and updated `evmchains/chains.py` metadata file
 
-**Do not edit `evmchain/chains.py` manually.** Any manual changes are likely to be overwritten later.
+**Do not edit `evmchains/chains.py` manually.** Any manual changes are likely to be overwritten later.
