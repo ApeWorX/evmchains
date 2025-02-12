@@ -100,6 +100,10 @@ CHAIN_IDS = {
         "mainnet": 250,
         "testnet": 4002,
     },
+    "filecoin": {
+        "mainnet": 314,
+        "calibration": 314159,
+    },
     "flow-evm": {
         "mainnet": 747,
         "testnet": 545,
