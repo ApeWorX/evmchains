@@ -194,6 +194,10 @@ CHAIN_IDS = {
     "soneium": {
         "minato": 1946,
     },
+    "sonic": {
+        "mainnet": 146,
+	    "blaze": 57054,
+    },
     "taiko": {
         "mainnet": 167000,
         "hekla": 167009,
