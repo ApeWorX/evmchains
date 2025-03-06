@@ -196,7 +196,7 @@ CHAIN_IDS = {
     },
     "sonic": {
         "mainnet": 146,
-     "blaze": 57054,
+        "blaze": 57054,
     },
     "taiko": {
         "mainnet": 167000,
