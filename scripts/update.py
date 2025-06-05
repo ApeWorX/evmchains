@@ -175,6 +175,9 @@ CHAIN_IDS = {
         "mainnet": 8008,
         "sepolia": 80008,
     },
+    "rise": {
+        "testnet": 11155931,
+    },
     "rootstock": {
         "mainnet": 30,
         "testnet": 31,
