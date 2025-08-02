@@ -57,7 +57,9 @@ CHAIN_IDS = {
         "sepolia": 84532,
     },
     "berachain": {
+        "testnet": 80069,
         "bartio": 80084,
+        "mainnet": 80094,
     },
     "blast": {
         "mainnet": 81457,
@@ -94,6 +96,7 @@ CHAIN_IDS = {
         "mainnet": 1,
         "goerli": 5,
         "holesky": 17000,
+        "hoodi": 560048,
         "sepolia": 11155111,
     },
     "fantom": {
@@ -194,6 +197,10 @@ CHAIN_IDS = {
         "mainnet": 360,
         "sepolia": 11011,
     },
+    "sophon": {
+        "mainnet": 50104,
+        "sepolia": 531050104,
+    },
     "soneium": {
         "minato": 1946,
     },
@@ -201,12 +208,17 @@ CHAIN_IDS = {
         "mainnet": 146,
         "blaze": 57054,
     },
+    "swellchain": {
+        "mainnet": 1923,
+        "sepolia": 1924,
+    },
     "taiko": {
         "mainnet": 167000,
         "hekla": 167009,
     },
     "unichain": {
         "sepolia": 1301,
+        "mainnet": 130,
     },
     "wemix": {
         "mainnet": 1111,
