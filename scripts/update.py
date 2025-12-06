@@ -5,13 +5,13 @@ README.md for more details.
 """
 
 import logging
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from pprint import PrettyPrinter
-from typing import Any, Dict
+from typing import Any
 from urllib.parse import urljoin
 
-import black
 import requests
 
 from evmchains.types import Chain
@@ -260,7 +260,7 @@ def stamp() -> str:
     return str(datetime.now(tz=timezone.utc))
 
 
-def ensure_dict(d: Dict[str, Any], key: str):
+def ensure_dict(d: dict[str, Any], key: str):
     """Ensures a dict value at key."""
     if key in d and isinstance(d[key], dict):
         return
@@ -296,9 +296,9 @@ def fetch_chain(chain_id: int) -> Chain:
     return chain
 
 
-def fetch_chains() -> Dict[str, Dict[str, Chain]]:
+def fetch_chains() -> dict[str, dict[str, Chain]]:
     """Fetch all chains from the ethereum-lists repo."""
-    chains: Dict[str, Dict[str, Chain]] = {}
+    chains: dict[str, dict[str, Chain]] = {}
     for ecosystem in CHAIN_IDS.keys():
         for network, chain_id in CHAIN_IDS[ecosystem].items():
             logger.info(f"Fetching chain {ecosystem}:{network} ({chain_id})")
@@ -307,7 +307,7 @@ def fetch_chains() -> Dict[str, Dict[str, Chain]]:
     return chains
 
 
-def write_chain_const(chains: Dict[str, Dict[str, Chain]]):
+def write_chain_const(chains: dict[str, dict[str, Chain]]):
     """Write the file with Python constant."""
     stamp_str = stamp()
     file_str = '"""Constants containing metadata for EVM-comaptitble chains.\n\n'
@@ -317,8 +317,7 @@ def write_chain_const(chains: Dict[str, Dict[str, Chain]]):
     file_str += f"!!!! {stamp_str}{' ' * (50 - len(stamp_str))}!!!!\n"
     file_str += "!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!\n"
     file_str += '"""\n\n'
-    file_str += "from typing import Any, Dict\n\n"
-    file_str += "PUBLIC_CHAIN_META: Dict[str, Dict[str, Dict[str, Any]]] = {\n"
+    file_str += "PUBLIC_CHAIN_META: dict[str, dict[str, dict]] = {\n"
 
     for ecosystem in chains.keys():
         file_str += f'    "{ecosystem}": {{\n'
@@ -328,11 +327,17 @@ def write_chain_const(chains: Dict[str, Dict[str, Chain]]):
         file_str += "    },\n"
     file_str += "}\n"
 
-    # black to make it actually readable
-    file_str = black.format_file_contents(file_str, fast=False, mode=black.FileMode())
-
     with CHAIN_CONST_FILE.open("w") as const_file:
         const_file.write(file_str)
+
+        # Format result w/ ruff
+        if (
+            result := subprocess.run(
+                ["ruff", "format", str(CHAIN_CONST_FILE)],
+                capture_output=True,
+            )
+        ).returncode != 0:
+            raise RuntimeError(result.stderr)
 
 
 def main():

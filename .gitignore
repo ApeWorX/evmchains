@@ -118,6 +118,9 @@ dmypy.json
 # setuptools-scm
 version.py
 
+# uv
+uv.lock
+
 # Ape stuff
 .build/
 
