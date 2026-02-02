@@ -57,8 +57,7 @@ CHAIN_IDS = {
         "sepolia": 84532,
     },
     "berachain": {
-        "testnet": 80069,
-        "bartio": 80084,
+        "bepolia": 80069,
         "mainnet": 80094,
     },
     "blast": {
@@ -137,6 +136,7 @@ CHAIN_IDS = {
     "lumia": {
         "prism": 994873017,
         "testnet": 1952959480,
+        "beam": 2030232745,
     },
     "mantle": {
         "mainnet": 5000,
