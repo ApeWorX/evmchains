@@ -146,6 +146,10 @@ CHAIN_IDS = {
     "metis": {
         "mainnet": 1088,
     },
+    "monad": {
+        "mainnet": 143,
+        "testnet": 10143,
+    },
     "moonbeam": {
         "mainnet": 1284,
         "moonbase": 1287,
