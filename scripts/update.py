@@ -28,6 +28,35 @@ BLACKLIST_STRINGS = [
     "rpc-sepolia.rockx.com",
 ]
 
+# Manual chain metadata for chains that are missing from (or wrong in) the
+# ethereum-lists repo. Keyed by chain ID. When a chain ID listed in CHAIN_IDS
+# also appears here, this data is used instead of fetching from the source repo.
+# Use this for chains that aren't registered upstream, or for reused-chain-ID
+# collisions where upstream resolves the ID to a different chain.
+OVERRIDES: dict[int, dict[str, Any]] = {
+    # Hyperliquid HyperEVM mainnet. Chain ID 999 is a known reused-chain-ID
+    # collision; ethereum-lists/chains assigns 999 to Wanchain Testnet.
+    999: {
+        "name": "Hyperliquid",
+        "chain": "HYPE",
+        "rpc": ["https://rpc.hyperliquid.xyz/evm"],
+        "faucets": [],
+        "nativeCurrency": {"name": "Hype", "symbol": "HYPE", "decimals": 18},
+        "infoURL": "https://hyperfoundation.org/",
+        "shortName": "hyperliquid",
+        "chainId": 999,
+        "networkId": 999,
+        "explorers": [
+            {
+                "name": "hyperevmscan",
+                "url": "https://hyperevmscan.io",
+                "standard": "EIP3091",
+            }
+        ],
+        "features": [{"name": "EIP155"}, {"name": "EIP1559"}],
+    },
+}
+
 # Mapping of Ape ecosystem:network to chain IDs. These are the chains that we will be
 # fetching.
 CHAIN_IDS = {
@@ -121,6 +150,10 @@ CHAIN_IDS = {
     "gnosis": {
         "chiado": 10200,
         "mainnet": 100,
+    },
+    "hyperliquid": {
+        "mainnet": 999,
+        "testnet": 998,
     },
     "kroma": {
         "mainnet": 255,
@@ -280,14 +313,18 @@ def is_uri_blacklisted(uri: str) -> bool:
 
 
 def fetch_chain(chain_id: int) -> Chain:
-    """Fetch a chain from the ethereum-lists repo."""
-    url = urljoin(SOURCE_URL, f"eip155-{chain_id}.json")
+    """Fetch a chain from the ethereum-lists repo (or a local override)."""
+    if chain_id in OVERRIDES:
+        logger.info(f"Using local override for chain {chain_id}")
+        chain = Chain.model_validate(OVERRIDES[chain_id])
+    else:
+        url = urljoin(SOURCE_URL, f"eip155-{chain_id}.json")
 
-    logger.info(f"GET {url}")
-    response = requests.get(url)
-    response.raise_for_status()
+        logger.info(f"GET {url}")
+        response = requests.get(url)
+        response.raise_for_status()
 
-    chain = Chain.model_validate_json(response.text)
+        chain = Chain.model_validate_json(response.text)
 
     # Filter out blacklisted URIs
     chain.rpc = list(filter(lambda rpc: not is_uri_blacklisted(rpc), chain.rpc))
