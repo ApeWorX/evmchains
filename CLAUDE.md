@@ -15,6 +15,7 @@ Python package providing EVM chain metadata, organized by Ape-style ecosystem an
 
 ### Other things to know
 
+- `OVERRIDES` in `scripts/update.py` is a `chain_id -> Chain fields` dict for chains missing from (or wrong in) the ethereum-lists repo — e.g. reused-chain-ID collisions like 999 (which upstream resolves to Wanchain Testnet, not Hyperliquid's HyperEVM mainnet). When a chain ID in `CHAIN_IDS` is also in `OVERRIDES`, the override data is used instead of fetching.
 - `BLACKLIST_STRINGS` in `scripts/update.py` filters out broken RPC URLs — append entries here when nodes are persistently down.
 - Only `http`/`https` RPC endpoints are kept; websockets are stripped.
 - The header timestamp in `chains.py` updates on every run, so a "no-op" run will still produce a diff on that line.
