@@ -55,6 +55,26 @@ OVERRIDES: dict[int, dict[str, Any]] = {
         ],
         "features": [{"name": "EIP155"}, {"name": "EIP1559"}],
     },
+    # Ronin Saigon testnet. Chain ID 2021 is a known reused-chain-ID collision;
+    # ethereum-lists/chains assigns 2021 to Edgeware EdgeEVM.
+    2021: {
+        "name": "Saigon Testnet",
+        "chain": "Ronin",
+        "rpc": ["https://saigon-testnet.roninchain.com/rpc"],
+        "faucets": ["https://faucet.roninchain.com"],
+        "nativeCurrency": {"name": "RON", "symbol": "RON", "decimals": 18},
+        "infoURL": "https://roninchain.com",
+        "shortName": "saigon",
+        "chainId": 2021,
+        "networkId": 2021,
+        "explorers": [
+            {
+                "name": "Ronin Saigon Block Explorer",
+                "url": "https://saigon-app.roninchain.com",
+                "standard": "EIP3091",
+            }
+        ],
+    },
 }
 
 # Mapping of Ape ecosystem:network to chain IDs. These are the chains that we will be
@@ -215,8 +235,9 @@ CHAIN_IDS = {
         "mainnet": 8008,
         "sepolia": 80008,
     },
-    "rise": {
-        "testnet": 11155931,
+    "ronin": {
+        "mainnet": 2020,
+        "testnet": 2021,
     },
     "rootstock": {
         "mainnet": 30,
