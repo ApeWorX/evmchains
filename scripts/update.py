@@ -5,13 +5,13 @@ README.md for more details.
 """
 
 import logging
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from pprint import PrettyPrinter
-from typing import Any, Dict
+from typing import Any
 from urllib.parse import urljoin
 
-import black
 import requests
 
 from evmchains.types import Chain
@@ -27,6 +27,55 @@ BLACKLIST_STRINGS = [
     # 2024-09-05: Node returning 504s for days.
     "rpc-sepolia.rockx.com",
 ]
+
+# Manual chain metadata for chains that are missing from (or wrong in) the
+# ethereum-lists repo. Keyed by chain ID. When a chain ID listed in CHAIN_IDS
+# also appears here, this data is used instead of fetching from the source repo.
+# Use this for chains that aren't registered upstream, or for reused-chain-ID
+# collisions where upstream resolves the ID to a different chain.
+OVERRIDES: dict[int, dict[str, Any]] = {
+    # Hyperliquid HyperEVM mainnet. Chain ID 999 is a known reused-chain-ID
+    # collision; ethereum-lists/chains assigns 999 to Wanchain Testnet.
+    999: {
+        "name": "Hyperliquid",
+        "chain": "HYPE",
+        "rpc": ["https://rpc.hyperliquid.xyz/evm"],
+        "faucets": [],
+        "nativeCurrency": {"name": "Hype", "symbol": "HYPE", "decimals": 18},
+        "infoURL": "https://hyperfoundation.org/",
+        "shortName": "hyperliquid",
+        "chainId": 999,
+        "networkId": 999,
+        "explorers": [
+            {
+                "name": "hyperevmscan",
+                "url": "https://hyperevmscan.io",
+                "standard": "EIP3091",
+            }
+        ],
+        "features": [{"name": "EIP155"}, {"name": "EIP1559"}],
+    },
+    # Ronin Saigon testnet. Chain ID 2021 is a known reused-chain-ID collision;
+    # ethereum-lists/chains assigns 2021 to Edgeware EdgeEVM.
+    2021: {
+        "name": "Saigon Testnet",
+        "chain": "Ronin",
+        "rpc": ["https://saigon-testnet.roninchain.com/rpc"],
+        "faucets": ["https://faucet.roninchain.com"],
+        "nativeCurrency": {"name": "RON", "symbol": "RON", "decimals": 18},
+        "infoURL": "https://roninchain.com",
+        "shortName": "saigon",
+        "chainId": 2021,
+        "networkId": 2021,
+        "explorers": [
+            {
+                "name": "Ronin Saigon Block Explorer",
+                "url": "https://saigon-app.roninchain.com",
+                "standard": "EIP3091",
+            }
+        ],
+    },
+}
 
 # Mapping of Ape ecosystem:network to chain IDs. These are the chains that we will be
 # fetching.
@@ -57,7 +106,8 @@ CHAIN_IDS = {
         "sepolia": 84532,
     },
     "berachain": {
-        "bartio": 80084,
+        "bepolia": 80069,
+        "mainnet": 80094,
     },
     "blast": {
         "mainnet": 81457,
@@ -94,11 +144,16 @@ CHAIN_IDS = {
         "mainnet": 1,
         "goerli": 5,
         "holesky": 17000,
+        "hoodi": 560048,
         "sepolia": 11155111,
     },
     "fantom": {
         "mainnet": 250,
         "testnet": 4002,
+    },
+    "filecoin": {
+        "mainnet": 314,
+        "calibration": 314159,
     },
     "flow-evm": {
         "mainnet": 747,
@@ -116,6 +171,10 @@ CHAIN_IDS = {
         "chiado": 10200,
         "mainnet": 100,
     },
+    "hyperliquid": {
+        "mainnet": 999,
+        "testnet": 998,
+    },
     "kroma": {
         "mainnet": 255,
         "sepolia": 2358,
@@ -130,6 +189,7 @@ CHAIN_IDS = {
     "lumia": {
         "prism": 994873017,
         "testnet": 1952959480,
+        "beam": 2030232745,
     },
     "mantle": {
         "mainnet": 5000,
@@ -138,6 +198,10 @@ CHAIN_IDS = {
     },
     "metis": {
         "mainnet": 1088,
+    },
+    "monad": {
+        "mainnet": 143,
+        "testnet": 10143,
     },
     "moonbeam": {
         "mainnet": 1284,
@@ -191,8 +255,20 @@ CHAIN_IDS = {
         "mainnet": 360,
         "sepolia": 11011,
     },
+    "sophon": {
+        "mainnet": 50104,
+        "sepolia": 531050104,
+    },
     "soneium": {
         "minato": 1946,
+    },
+    "sonic": {
+        "mainnet": 146,
+        "blaze": 57054,
+    },
+    "swellchain": {
+        "mainnet": 1923,
+        "sepolia": 1924,
     },
     "taiko": {
         "mainnet": 167000,
@@ -200,6 +276,7 @@ CHAIN_IDS = {
     },
     "unichain": {
         "sepolia": 1301,
+        "mainnet": 130,
     },
     "wemix": {
         "mainnet": 1111,
@@ -241,7 +318,7 @@ def stamp() -> str:
     return str(datetime.now(tz=timezone.utc))
 
 
-def ensure_dict(d: Dict[str, Any], key: str):
+def ensure_dict(d: dict[str, Any], key: str):
     """Ensures a dict value at key."""
     if key in d and isinstance(d[key], dict):
         return
@@ -257,14 +334,18 @@ def is_uri_blacklisted(uri: str) -> bool:
 
 
 def fetch_chain(chain_id: int) -> Chain:
-    """Fetch a chain from the ethereum-lists repo."""
-    url = urljoin(SOURCE_URL, f"eip155-{chain_id}.json")
+    """Fetch a chain from the ethereum-lists repo (or a local override)."""
+    if chain_id in OVERRIDES:
+        logger.info(f"Using local override for chain {chain_id}")
+        chain = Chain.model_validate(OVERRIDES[chain_id])
+    else:
+        url = urljoin(SOURCE_URL, f"eip155-{chain_id}.json")
 
-    logger.info(f"GET {url}")
-    response = requests.get(url)
-    response.raise_for_status()
+        logger.info(f"GET {url}")
+        response = requests.get(url)
+        response.raise_for_status()
 
-    chain = Chain.model_validate_json(response.text)
+        chain = Chain.model_validate_json(response.text)
 
     # Filter out blacklisted URIs
     chain.rpc = list(filter(lambda rpc: not is_uri_blacklisted(rpc), chain.rpc))
@@ -277,9 +358,9 @@ def fetch_chain(chain_id: int) -> Chain:
     return chain
 
 
-def fetch_chains() -> Dict[str, Dict[str, Chain]]:
+def fetch_chains() -> dict[str, dict[str, Chain]]:
     """Fetch all chains from the ethereum-lists repo."""
-    chains: Dict[str, Dict[str, Chain]] = {}
+    chains: dict[str, dict[str, Chain]] = {}
     for ecosystem in CHAIN_IDS.keys():
         for network, chain_id in CHAIN_IDS[ecosystem].items():
             logger.info(f"Fetching chain {ecosystem}:{network} ({chain_id})")
@@ -288,7 +369,7 @@ def fetch_chains() -> Dict[str, Dict[str, Chain]]:
     return chains
 
 
-def write_chain_const(chains: Dict[str, Dict[str, Chain]]):
+def write_chain_const(chains: dict[str, dict[str, Chain]]):
     """Write the file with Python constant."""
     stamp_str = stamp()
     file_str = '"""Constants containing metadata for EVM-comaptitble chains.\n\n'
@@ -298,8 +379,7 @@ def write_chain_const(chains: Dict[str, Dict[str, Chain]]):
     file_str += f"!!!! {stamp_str}{' ' * (50 - len(stamp_str))}!!!!\n"
     file_str += "!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!\n"
     file_str += '"""\n\n'
-    file_str += "from typing import Any, Dict\n\n"
-    file_str += "PUBLIC_CHAIN_META: Dict[str, Dict[str, Dict[str, Any]]] = {\n"
+    file_str += "PUBLIC_CHAIN_META: dict[str, dict[str, dict]] = {\n"
 
     for ecosystem in chains.keys():
         file_str += f'    "{ecosystem}": {{\n'
@@ -309,11 +389,17 @@ def write_chain_const(chains: Dict[str, Dict[str, Chain]]):
         file_str += "    },\n"
     file_str += "}\n"
 
-    # black to make it actually readable
-    file_str = black.format_file_contents(file_str, fast=False, mode=black.FileMode())
-
     with CHAIN_CONST_FILE.open("w") as const_file:
         const_file.write(file_str)
+
+        # Format result w/ ruff
+        if (
+            result := subprocess.run(
+                ["ruff", "format", str(CHAIN_CONST_FILE)],
+                capture_output=True,
+            )
+        ).returncode != 0:
+            raise RuntimeError(result.stderr)
 
 
 def main():

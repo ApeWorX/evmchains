@@ -7,7 +7,7 @@ below utility functions.
 import os
 import random
 import re
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from evmchains.types import Chain
@@ -29,7 +29,7 @@ def get_chain_meta(ecosystem: str, network: str) -> "Chain":
     return Chain(**PUBLIC_CHAIN_META[ecosystem][network])
 
 
-def get_rpcs(ecosystem: str, network: str) -> List[str]:
+def get_rpcs(ecosystem: str, network: str) -> list[str]:
     """Get a list of valid RPC endpoints for an ecosystem:network pair."""
     rpcs = []
 

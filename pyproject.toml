@@ -4,49 +4,62 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "evmchains"
+dynamic = ["version"]
 description = "Packaged metadata on Ethereum Virtual Machine (EVM) chains"
-urls = {source = "https://github.com/ApeWorx/evmchains"}
 readme = "README.md"
-requires-python = ">=3.8"
+license = "Apache-2.0"
+requires-python = ">=3.10"
 keywords = ["ethereum", "evm", "blockchain"]
-license = {file = "LICENSE"}
+authors = [
+    { name = "ApeWorX", email = "admin@apeworx.io" },
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "Intended Audience :: End Users/Desktop",
-    "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: MacOS",
     "Operating System :: POSIX",
     "Operating System :: Microsoft :: Windows",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
     "pydantic>=2.5.3,<3",
 ]
-dynamic = ["version"]
 
-[project.optional-dependencies]
+[project.urls]
+Homepage = "https://github.com/ApeWorX/evmchains"
+Documentation = "https://github.com/ApeWorX/evmchains#readme"
+Issues = "https://github.com/ApeWorX/evmchains/issues"
+Source = "https://github.com/ApeWorX/evmchains"
+
+[dependency-groups]
+test = [
+    "pytest",
+    "pytest-xdist",
+]
+lint = [
+    "ruff",
+    "mypy",
+    "mdformat",
+]
+docs = [
+    "sphinx-ape",
+]
 dev = [
-    # NOTE: black still used as a library in update.py
-    "black~=23.12.1",
-    "build~=1.0.3",
-    "mypy~=1.8.0",
-    "pytest~=7.4.4",
-    "requests~=2.31.0",
-    "ruff~=0.6.8",
-    "setuptools-scm~=8.0.4",
-    "types-requests>=2.31.0.20240106",
+    "requests",  # For scripts
+    "types-requests",
+    { include-group = "lint" },
+    { include-group = "test" },
+    { include-group = "docs" },
 ]
 
-[tool.mypy]
-exclude = "build/"
+[tool.setuptools_scm]
+write_to = "evmchains/version.py"
 
 [tool.ruff]
 # Mimic's black's default line length
@@ -70,9 +83,14 @@ extend-select = [
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.setuptools_scm]
-write_to = "evmchains/_meta.py"
+[tool.ruff.lint.isort]
+known-third-party = ["pydantic", "pytest"]
 
-[tool.pytest.ini_options]
-python_files = "test_*.py"
-testpaths = "tests"
+[tool.mypy]
+exclude = "build/"
+
+[tool.commitlint]
+extends = ["@commitlint/config-conventional"]
+
+[tool.commitlint.rules]
+header-max-length = 100

@@ -1,7 +1,7 @@
 """Types used in the evmchains package."""
 
 # ruff: noqa: N815
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from pydantic import BaseModel
 
@@ -15,11 +15,11 @@ class Chain(BaseModel):
     shortName: str
     chain: str
     infoURL: str
-    rpc: List[str]
-    faucets: List[str]
-    nativeCurrency: Dict[str, Any]
-    explorers: List[Dict[str, str]] = []
-    icon: Optional[str] = None
-    features: Optional[List[Dict[str, str]]] = None
-    slip44: Optional[int] = None
-    ens: Optional[Dict[str, str]] = None
+    rpc: list[str]
+    faucets: list[str]
+    nativeCurrency: dict[str, Any]
+    explorers: list[dict[str, str]] = []
+    icon: str | None = None
+    features: list[dict[str, str]] | None = None
+    slip44: int | None = None
+    ens: dict[str, str] | None = None
