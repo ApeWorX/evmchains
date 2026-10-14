@@ -90,9 +90,8 @@ CHAIN_IDS = {
     },
     "arbitrum": {
         "mainnet": 42161,
-        "goerli": 421613,
-        "sepolia": 421614,
         "nova": 42170,
+        "sepolia": 421614,
     },
     "arc": {
         "mainnet": 5042,
@@ -110,27 +109,26 @@ CHAIN_IDS = {
         "sepolia": 84532,
     },
     "berachain": {
-        "bepolia": 80069,
         "mainnet": 80094,
+        "bepolia": 80069,
     },
     "blast": {
         "mainnet": 81457,
         "sepolia": 168587773,
-        "testnet": 23888,
     },
     "bsc": {
         "mainnet": 56,
-        "testnet": 97,
         "opbnb": 204,
         "opbnb-testnet": 5611,
+        "testnet": 97,
     },
     "bttc": {
         "mainnet": 199,
-        "donau": 1028,
+        "donau": 1029,
     },
     "celo": {
         "mainnet": 42220,
-        "alfajores": 44787,
+        "sepolia": 11142220,
     },
     "cronos": {
         "mainnet": 25,
@@ -138,7 +136,7 @@ CHAIN_IDS = {
     },
     "cronos-zkevm": {
         "mainnet": 388,
-        "testnet": 282,
+        "testnet": 240,
     },
     "crossfi": {
         "mainnet": 4158,
@@ -146,14 +144,11 @@ CHAIN_IDS = {
     },
     "ethereum": {
         "mainnet": 1,
-        "goerli": 5,
-        "holesky": 17000,
         "hoodi": 560048,
         "sepolia": 11155111,
     },
     "fantom": {
         "mainnet": 250,
-        "testnet": 4002,
     },
     "filecoin": {
         "mainnet": 314,
@@ -165,25 +160,30 @@ CHAIN_IDS = {
     },
     "fraxtal": {
         "mainnet": 252,
-        "holesky": 2522,
+        "hoodi": 2523,
     },
     "geist": {
         "mainnet": 63157,
         "polter": 631571,
     },
     "gnosis": {
-        "chiado": 10200,
         "mainnet": 100,
+        "chiado": 10200,
     },
     "hyperliquid": {
         "mainnet": 999,
         "testnet": 998,
     },
-    "kroma": {
-        "mainnet": 255,
-        "sepolia": 2358,
+    "ink": {
+        "mainnet": 57073,
+        "sepolia": 763373,
+    },
+    "katana": {
+        "mainnet": 747474,
+        "bokuto": 737373,
     },
     "lens": {
+        "mainnet": 232,
         "sepolia": 37111,
     },
     "linea": {
@@ -191,14 +191,19 @@ CHAIN_IDS = {
         "sepolia": 59141,
     },
     "lumia": {
+        "beam": 2030232745,
         "prism": 994873017,
         "testnet": 1952959480,
-        "beam": 2030232745,
     },
     "mantle": {
         "mainnet": 5000,
-        "testnet": 5001,
+        "hoodi": 50002,
         "sepolia": 5003,
+        "testnet": 5001,
+    },
+    "megaeth": {
+        "mainnet": 4326,
+        "testnet": 6343,
     },
     "metis": {
         "mainnet": 1088,
@@ -212,32 +217,37 @@ CHAIN_IDS = {
         "moonbase": 1287,
         "moonriver": 1285,
     },
-    "optimism": {
-        "mainnet": 10,
-        "goerli": 420,
-        "sepolia": 11155420,
-    },
     "oort": {
         "mainnet": 970,
         "dev": 9700,
+    },
+    "optimism": {
+        "mainnet": 10,
+        "sepolia": 11155420,
     },
     "palm": {
         "mainnet": 11297108109,
         "testnet": 11297108099,
     },
+    "plasma": {
+        "mainnet": 9745,
+        "testnet": 9746,
+    },
     "polygon": {
         "mainnet": 137,
-        "mumbai": 80001,
         "amoy": 80002,
     },
     "polygon-zkevm": {
         "mainnet": 1101,
-        "testnet": 1442,
         "cardona": 2442,
     },
     "polynomial": {
         "mainnet": 8008,
         "sepolia": 80008,
+    },
+    "robinhood": {
+        "mainnet": 4663,
+        "testnet": 46630,
     },
     "ronin": {
         "mainnet": 2020,
@@ -247,28 +257,33 @@ CHAIN_IDS = {
         "mainnet": 30,
         "testnet": 31,
     },
-    "shibarium": {
-        "mainnet": 109,
-        "puppynet": 157,
-    },
     "scroll": {
         "mainnet": 534352,
         "sepolia": 534351,
+    },
+    "sei": {
+        "mainnet": 1329,
+        "testnet": 1328,
     },
     "shape": {
         "mainnet": 360,
         "sepolia": 11011,
     },
-    "sophon": {
-        "mainnet": 50104,
-        "sepolia": 531050104,
+    "shibarium": {
+        "mainnet": 109,
+        "puppynet": 157,
     },
     "soneium": {
+        "mainnet": 1868,
         "minato": 1946,
     },
     "sonic": {
         "mainnet": 146,
-        "blaze": 57054,
+        "testnet": 14601,
+    },
+    "sophon": {
+        "mainnet": 50104,
+        "sepolia": 531050104,
     },
     "swellchain": {
         "mainnet": 1923,
@@ -276,11 +291,15 @@ CHAIN_IDS = {
     },
     "taiko": {
         "mainnet": 167000,
-        "hekla": 167009,
+        "hoodi": 167013,
+    },
+    "tempo": {
+        "mainnet": 4217,
+        "moderato": 42431,
     },
     "unichain": {
-        "sepolia": 1301,
         "mainnet": 130,
+        "sepolia": 1301,
     },
     "wemix": {
         "mainnet": 1111,
