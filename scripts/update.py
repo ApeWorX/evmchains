@@ -94,6 +94,10 @@ CHAIN_IDS = {
         "sepolia": 421614,
         "nova": 42170,
     },
+    "arc": {
+        "mainnet": 5042,
+        "testnet": 5042002,
+    },
     "astar": {
         "mainnet": 592,
     },
