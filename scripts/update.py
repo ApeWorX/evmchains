@@ -326,7 +326,7 @@ def ensure_dict(d: dict[str, Any], key: str):
     """Ensures a dict value at key."""
     if key in d and isinstance(d[key], dict):
         return
-    d[key] = dict()
+    d[key] = {}
 
 
 def is_uri_blacklisted(uri: str) -> bool:
@@ -365,8 +365,8 @@ def fetch_chain(chain_id: int) -> Chain:
 def fetch_chains() -> dict[str, dict[str, Chain]]:
     """Fetch all chains from the ethereum-lists repo."""
     chains: dict[str, dict[str, Chain]] = {}
-    for ecosystem in CHAIN_IDS.keys():
-        for network, chain_id in CHAIN_IDS[ecosystem].items():
+    for ecosystem, networks in CHAIN_IDS.items():
+        for network, chain_id in networks.items():
             logger.info(f"Fetching chain {ecosystem}:{network} ({chain_id})")
             ensure_dict(chains, ecosystem)
             chains[ecosystem][network] = fetch_chain(chain_id)
@@ -385,9 +385,9 @@ def write_chain_const(chains: dict[str, dict[str, Chain]]):
     file_str += '"""\n\n'
     file_str += "PUBLIC_CHAIN_META: dict[str, dict[str, dict]] = {\n"
 
-    for ecosystem in chains.keys():
+    for ecosystem, networks in chains.items():
         file_str += f'    "{ecosystem}": {{\n'
-        for network, chain in chains[ecosystem].items():
+        for network, chain in networks.items():
             # pprint to make a somewhat pythonic string output
             file_str += f'        "{network}": {pp.pformat(chain.model_dump())},\n'
         file_str += "    },\n"
@@ -401,6 +401,7 @@ def write_chain_const(chains: dict[str, dict[str, Chain]]):
             result := subprocess.run(
                 ["ruff", "format", str(CHAIN_CONST_FILE)],
                 capture_output=True,
+                check=False,
             )
         ).returncode != 0:
             raise RuntimeError(result.stderr)
