@@ -9,7 +9,9 @@ from evmchains import PUBLIC_CHAIN_META, Chain, get_chain_meta, get_rpcs
 @pytest.fixture()
 def env():
     @contextmanager
-    def inner(environ=dict(), unset=list()):
+    def inner(environ=None, unset=None):
+        environ = environ or {}
+        unset = unset or []
         old_environ = os.environ.copy()
         os.environ.update(environ)
         for key in unset:
@@ -18,7 +20,8 @@ def env():
             except KeyError:
                 pass
         yield
-        os.environ = old_environ
+        os.environ.clear()
+        os.environ.update(old_environ)
 
     return inner
 
